@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from plot import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('plot.urls')),
+    url(r'^$', views.plot, name='plot'),
+    url(r'^getreq/$', views.disp)
 ]
