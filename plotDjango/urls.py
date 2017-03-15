@@ -19,7 +19,7 @@ from plot import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include('plot.urls')),
     url(r'^$', views.plot, name='plot'),
-    url(r'^getreq/$', views.disp)
+    url(r'^stocks/$', views.stocks),
+    url(r'^fetch/$', views.chart_data_json, name='chart_data_json'),
 ]

@@ -11,8 +11,11 @@ ${demo.css}
 		<script type="text/javascript">
 $(function () {
 
+    var chartDataUrl = "{% url 'chart_data_json' %}?days=14";
+{#    chartDataUrl = 'https://www.highcharts.com/samples/data/jsonp' +#}
+{#    '.php?filename=aapl-c.json&callback=?'#}
 
-    $.getJSON('/data.json', function (sales) {
+    $.getJSON(chartDataUrl, function (data) {
         // Create the chart
 
         Highcharts.stockChart('container', {
@@ -23,7 +26,7 @@ $(function () {
             },
 
             title: {
-                text: 'AAPL Stock Price'
+                text: 'Urovol Data'
             },
 
             credits: {
@@ -33,7 +36,7 @@ $(function () {
 
             series: [{
                 name: 'AAPL',
-                data: sales,
+                data: data,
                 tooltip: {
                     valueDecimals: 2
                 }

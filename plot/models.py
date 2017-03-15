@@ -4,22 +4,20 @@ from django.db import models
 
 # Create your models here.
 
-class MonthlyWeatherByCity(models.Model):
-    month = models.IntegerField()
-    boston_temp = models.DecimalField(max_digits=5, decimal_places=1)
-    houston_temp = models.DecimalField(max_digits=5, decimal_places=1)
-    new_york_temp = models.DecimalField(max_digits=5, decimal_places=1)
-    san_franciso_temp = models.DecimalField(max_digits=5, decimal_places=1)
+class Pi(models.Model) :
+    address = models.CharField(max_length=100)
+    code = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.address + '-' + self.code
 
-class MonthlyWeatherSeattle(models.Model):
-    month = models.IntegerField()
-    seattle_temp = models.DecimalField(max_digits=5, decimal_places=1)
+class Data(models.Model):
+    pi = models.ForeignKey(Pi, on_delete=models.CASCADE)
+    date_time = models.DateTimeField()
+    vol = models.DecimalField(max_digits=7, decimal_places=1)
 
-
-class DailyWeather(models.Model):
-    month = models.IntegerField()
-    day = models.IntegerField()
-    temperature = models.DecimalField(max_digits=5, decimal_places=1)
-    city = models.CharField(max_length=50)
-    state = models.CharField(max_length=2)
+    def __str__(self):
+        return "Vol:" + str(self.vol) + " Time:" + self.date_time.strftime(
+            '%x/%X') + \
+                      'Pi:' +\
+               str(self.pi)
